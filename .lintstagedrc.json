@@ -1,0 +1,23 @@
+{
+  "*.js": [
+    "eslint --fix"
+  ],
+  "*.jsx": [
+    "eslint --fix"
+  ],
+  "*.ts": [
+    "eslint --fix"
+  ],
+  "*.tsx": [
+    "eslint --fix"
+  ],
+  "*.vue": [
+    "stylelint --fix",
+    "eslint --fix"
+  ],
+  "*.sass": "stylelint --fix",
+  "*.scss": "stylelint --fix",
+  "*.less": "stylelint --fix",
+  "*.stylus": "stylelint --fix",
+  "*.css": "stylelint --fix"
+}
