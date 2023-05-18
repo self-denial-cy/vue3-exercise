@@ -2,10 +2,22 @@
   "*.js": [
     "eslint --fix"
   ],
+  "*.cjs": [
+    "eslint --fix"
+  ],
+  "*.mjs": [
+    "eslint --fix"
+  ],
   "*.jsx": [
     "eslint --fix"
   ],
   "*.ts": [
+    "eslint --fix"
+  ],
+  "*.cts": [
+    "eslint --fix"
+  ],
+  "*.mts": [
     "eslint --fix"
   ],
   "*.tsx": [
