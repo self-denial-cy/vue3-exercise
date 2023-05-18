@@ -1,13 +1,24 @@
 <script setup lang="ts">
+import { ref, onMounted } from 'vue';
 import { RouterLink, RouterView } from 'vue-router';
 import HelloWorld from './components/HelloWorld.vue';
+
+const componentRef = ref(null);
+
+onMounted(() => {
+  console.log(componentRef.value);
+});
+
+function handleTrigger(text: string) {
+  alert(text);
+}
 </script>
 
 <template>
   <header>
     <img alt="Vue logo" class="logo" src="./assets/imgs/logo.svg" width="125" height="125" />
     <div class="wrapper">
-      <HelloWorld msg="Hello Vue3" />
+      <HelloWorld ref="componentRef" msg="Hello Vue3" @trigger="handleTrigger" />
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
