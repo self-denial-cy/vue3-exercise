@@ -2,7 +2,7 @@ import { ref, isRef, unref, watchEffect } from 'vue';
 import type { Ref } from 'vue';
 
 export function useFetch(url: Ref<string> | string) {
-  const data = ref(null);
+  const data: Ref<string | null> = ref(null);
   const error = ref(null);
 
   let timer: NodeJS.Timer | null = null;
@@ -21,8 +21,8 @@ export function useFetch(url: Ref<string> | string) {
     }
     timer = setTimeout(() => {
       fetch(unref(url))
-        .then((res) => res.json())
-        .then((json) => (data.value = json))
+        .then((res) => res.text())
+        .then((text) => (data.value = text))
         .catch((err) => (error.value = err));
     }, 500);
   }

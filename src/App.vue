@@ -12,20 +12,38 @@ onMounted(() => {
 function handleTrigger(text: string) {
   alert(text);
 }
+
+const backgroundColor = 'black';
 </script>
 
 <template>
   <header>
     <img alt="Vue logo" class="logo" src="./assets/imgs/logo.svg" width="125" height="125" />
     <div class="wrapper">
-      <HelloWorld ref="componentRef" msg="Hello Vue3" @trigger="handleTrigger" />
+      <!-- 当在组件上使用自定义指令时，它始终应用于组件的根节点，和透传 attributes 类似 -->
+      <!-- 需要注意，组件可能含有多个根节点，当应用到这种组件时，指令将会被忽略且抛出一个警告 -->
+      <!-- 和 attribute 不同，指令不能通过类似 v-bind="$attrs" 的形式来传递 -->
+      <!-- 总体来说，不推荐在组件上使用自定义指令 -->
+      <HelloWorld ref="componentRef" v-backgroundColor="backgroundColor" msg="Hello Vue3" @trigger="handleTrigger" />
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/modal">Modal</RouterLink>
       </nav>
     </div>
   </header>
-  <RouterView />
+  <RouterView v-slot="{ Component }">
+    <template v-if="Component">
+      <Transition mode="out-in">
+        <KeepAlive>
+          <Suspense>
+            <component :is="Component"></component>
+            <template #fallback>正在加载中...</template>
+          </Suspense>
+        </KeepAlive>
+      </Transition>
+    </template>
+  </RouterView>
 </template>
 
 <style scoped>
